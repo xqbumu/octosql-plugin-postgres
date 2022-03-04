@@ -35,6 +35,7 @@ func (d *DatasourceExecuting) Run(ctx ExecutionContext, produce ProduceFn, metaS
 		placeholderValues[i] = value.ToRawGoValue()
 	}
 
+	log.Println(d.stmt.SQL, placeholderValues)
 	rows, err := d.db.QueryEx(ctx, d.stmt.SQL, nil, placeholderValues...)
 	if err != nil {
 		return fmt.Errorf("couldn't execute database query: %w", err)
